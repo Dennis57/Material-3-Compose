@@ -26,10 +26,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -55,7 +53,7 @@ class TextMaterialActivity : ComponentActivity() {
                         }
                         TextField(
                             value = filledText,
-                            onValueChange = { filledText = it},
+                            onValueChange = { filledText = it },
                             enabled = true,
                             textStyle = LocalTextStyle.current.copy(
                                 textAlign = TextAlign.Right
@@ -65,7 +63,7 @@ class TextMaterialActivity : ComponentActivity() {
                                     text = "Enter Your Weight"
                                 )
                             },
-                            placeholder ={
+                            placeholder = {
                                 Text(
                                     text = "Weight"
                                 )
@@ -103,7 +101,7 @@ class TextMaterialActivity : ComponentActivity() {
                         }
                         OutlinedTextField(
                             value = outlinedText,
-                            onValueChange = { outlinedText = it},
+                            onValueChange = { outlinedText = it },
                             enabled = true,
                             textStyle = LocalTextStyle.current.copy(
                                 textAlign = TextAlign.Right
@@ -113,7 +111,7 @@ class TextMaterialActivity : ComponentActivity() {
                                     text = "Enter Your Weight"
                                 )
                             },
-                            placeholder ={
+                            placeholder = {
                                 Text(
                                     text = "Weight"
                                 )

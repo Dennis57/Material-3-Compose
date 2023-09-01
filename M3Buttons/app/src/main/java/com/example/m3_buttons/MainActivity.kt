@@ -56,7 +56,10 @@ class MainActivity : ComponentActivity() {
                             Text(text = "Text Material 3")
                         }
                         ElevatedButton(
-                            onClick = { /*TODO*/ }
+                            onClick = {
+                                val intent = Intent(this@MainActivity, SelectionActivity::class.java)
+                                startActivity(intent)
+                            }
                         ) {
                             Icon(
                                 imageVector = Icons.Outlined.Add,
@@ -66,7 +69,7 @@ class MainActivity : ComponentActivity() {
                             Spacer(
                                 modifier = Modifier.width(8.dp)
                             )
-                            Text(text = "Add to cart")
+                            Text(text = "Selection Activity")
                         }
                         FilledTonalButton(
                             onClick = { /*TODO*/ }

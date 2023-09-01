@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">M3-Buttons</string>
     <string name="title_activity_text_material">TextMaterialActivity</string>
+    <string name="title_activity_selection">SelectionActivity</string>
 </resources>
