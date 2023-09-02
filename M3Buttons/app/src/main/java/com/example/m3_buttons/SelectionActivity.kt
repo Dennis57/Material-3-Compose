@@ -3,13 +3,22 @@ package com.example.m3_buttons
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TriStateCheckbox
 import androidx.compose.runtime.Composable
@@ -22,6 +31,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.m3_buttons.ui.theme.M3ButtonsTheme
 
 class SelectionActivity : ComponentActivity() {
@@ -37,9 +47,17 @@ class SelectionActivity : ComponentActivity() {
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding()
+                            .padding(16.dp)
                     ) {
                         Checkboxes()
+
+                        Spacer(modifier = Modifier.height(32.dp))
+
+                        MySwitch()
+
+                        Spacer(modifier = Modifier.height(32.dp))
+
+                        RadioButtons()
                     }
                 }
             }
@@ -53,7 +71,7 @@ data class ToggleableInfo(
 )
 
 @Composable
-fun Checkboxes() {
+private fun Checkboxes() {
     val checkboxes = remember {
         mutableStateListOf(
             ToggleableInfo(
@@ -90,18 +108,33 @@ fun Checkboxes() {
          }
     }
     Row(
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .clickable {
+                toggleTriState()
+            }
+            .padding(end = 16.dp)
     ) {
         TriStateCheckbox(
             state = triState,
-            onClick = toggleTriState
+            onClick = {
+                toggleTriState()
+            }
         )
         Text(text = "File Types")
     }
 
     checkboxes.forEachIndexed { index, info ->
         Row(
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .padding(start = 32.dp)
+                .clickable {
+                    checkboxes[index] = info.copy(
+                        isChecked = !info.isChecked
+                    )
+                }
+                .padding(end = 16.dp)
         ) {
             Checkbox(
                 checked = info.isChecked,
@@ -120,6 +153,90 @@ fun Checkboxes() {
 @Composable
 fun GreetingPreview3() {
     M3ButtonsTheme {
+        Checkboxes()
+    }
+}
 
+@Composable
+private fun MySwitch() {
+    var switch by remember {
+        mutableStateOf(
+            ToggleableInfo(
+                isChecked = false,
+                text = "Dark Mode"
+            )
+        )
+    }
+
+    Row(
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = switch.text
+        )
+        Spacer(modifier = Modifier.weight(1f))
+        Switch(
+            checked = switch.isChecked,
+            onCheckedChange = {isChecked ->
+                switch = switch.copy(isChecked = isChecked)
+            },
+            thumbContent = {
+                Icon(
+                    imageVector = if(switch.isChecked) {
+                        Icons.Default.Check
+                    } else {
+                        Icons.Default.Close
+                    },
+                    contentDescription = null
+                )
+            }
+        )
+    }
+}
+
+@Composable
+private fun RadioButtons() {
+    val radioButtons = remember {
+        mutableStateListOf(
+            ToggleableInfo(
+                isChecked = true,
+                text = "Photos"
+            ),
+            ToggleableInfo(
+                isChecked = false,
+                text = "Videos"
+            ),
+            ToggleableInfo(
+                isChecked = false,
+                text = "Audio"
+            )
+        )
+    }
+
+    radioButtons.forEachIndexed { index, info ->
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .clickable {
+                    radioButtons.replaceAll {
+                        it.copy(
+                            isChecked = it.text == info.text
+                        )
+                    }
+                }
+                .padding(end = 16.dp)
+        ) {
+            RadioButton(
+                selected = info.isChecked,
+                onClick = {
+                    radioButtons.replaceAll {
+                        it.copy(
+                            isChecked = it.text == info.text
+                        )
+                    }
+                }
+            )
+            Text(text = info.text)
+        }
     }
 }
