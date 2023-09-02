@@ -72,7 +72,10 @@ class MainActivity : ComponentActivity() {
                             Text(text = "Selection Activity")
                         }
                         FilledTonalButton(
-                            onClick = { /*TODO*/ }
+                            onClick = {
+                                val intent = Intent(this@MainActivity, TopAppBarActivity::class.java)
+                                startActivity(intent)
+                            }
                         ) {
                             Text(text = "Open in browser")
                         }
