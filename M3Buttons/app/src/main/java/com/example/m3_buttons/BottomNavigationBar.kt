@@ -92,6 +92,7 @@ class BottomNavigationBar : ComponentActivity() {
                                         label = {
                                             Text(text = item.title)
                                         },
+//                                        alwaysShowLabel = false,
                                         icon = {
                                             BadgedBox(
                                                 badge = {
