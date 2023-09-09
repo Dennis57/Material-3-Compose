@@ -77,12 +77,15 @@ class MainActivity : ComponentActivity() {
                                 startActivity(intent)
                             }
                         ) {
-                            Text(text = "Open in browser")
+                            Text(text = "Top App Bar")
                         }
                         OutlinedButton(
-                            onClick = { /*TODO*/ }
+                            onClick = {
+                                val intent = Intent(this@MainActivity, BottomAppBar::class.java)
+                                startActivity(intent)
+                            }
                         ) {
-                            Text(text = "Back")
+                            Text(text = "Bottom App Bar")
                         }
                         TextButton(
                             onClick = { /*TODO*/ }
