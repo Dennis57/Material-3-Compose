@@ -88,9 +88,11 @@ class MainActivity : ComponentActivity() {
                             Text(text = "Bottom App Bar")
                         }
                         TextButton(
-                            onClick = { /*TODO*/ }
+                            onClick = {
+                                val intent = Intent(this@MainActivity, BottomNavigationBar::class.java)
+                                startActivity(intent) }
                         ) {
-                            Text(text = "Learn More")
+                            Text(text = "Bottom Navigation Bar")
                         }
                         ExtendedFloatingActionButton(
                             onClick = { /*TODO*/ }
